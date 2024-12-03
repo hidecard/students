@@ -5,18 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Management</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 </head>
 <body>
-  <div class="container mt-5">
-    <h1 class="text-center">Student Management</h1>
+  <div class="container mt-3">
+    <h4 class="text-center">Student Management</h4>
     <form id="addStudentForm" class="mb-4">
-      <div class="mb-3">
+      <div class="mb-1">
         <label for="name" class="form-label">Name</label>
-        <input type="text" id="name" class="form-control" required>
+        <input type="text" placeholder="Enter student name" id="name" class="form-control" required>
       </div>
-      <div class="mb-3">
+      <div class="mb-1">
         <label for="phone" class="form-label">Phone</label>
-        <input type="text" id="phone" class="form-control" required>
+        <input type="text" placeholder="Enter Phone Number" id="phone" class="form-control" required>
       </div>
       <div class="mb-3">
         <label for="class" class="form-label">Class</label>
@@ -28,8 +29,9 @@
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Add Student</button>
+      <button onclick="exportToExcel()" class="btn btn-success">Export to Excel</button>
     </form>
-    <table class="table table-bordered">
+    <table id="studentsTables" class="table table-bordered">
       <thead>
         <tr>
           <th>#</th>
@@ -41,9 +43,6 @@
       </thead>
       <tbody id="studentsTable"></tbody>
     </table>
-    <nav>
-      <ul class="pagination justify-content-center" id="paginationControls"></ul>
-    </nav>
   </div>
 
   <!-- Edit Modal -->
@@ -83,6 +82,14 @@
     </div>
   </div>
 
+  <script>
+    // Export Table Data to Excel
+    function exportToExcel() {
+      const table = document.getElementById("studentsTables"); // Table element ID
+      const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet1" }); // Convert table to workbook
+      XLSX.writeFile(workbook, "students_data.xlsx"); // Save as Excel file
+    }
+  </script>
   <script type="module" src="./script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
