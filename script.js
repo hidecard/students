@@ -96,3 +96,21 @@ document.getElementById("editStudentForm").addEventListener("submit", (e) => {
   });
 });
 
+// Add Search Functionality
+document.getElementById("searchBar").addEventListener("input", (e) => {
+  const searchValue = e.target.value.toLowerCase();
+  const studentsTable = document.getElementById("studentsTable");
+  const rows = studentsTable.getElementsByTagName("tr");
+
+  Array.from(rows).forEach((row) => {
+    const nameCell = row.getElementsByTagName("td")[1]; // Name column
+    if (nameCell) {
+      const nameText = nameCell.textContent || nameCell.innerText;
+      if (nameText.toLowerCase().includes(searchValue)) {
+        row.style.display = ""; // Show row
+      } else {
+        row.style.display = "none"; // Hide row
+      }
+    }
+  });
+});
