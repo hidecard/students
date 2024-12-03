@@ -4,13 +4,13 @@ import { getDatabase, ref, push, onValue, update, remove } from "https://www.gst
 
 // Firebase Configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCrfPbwwfiopkPNQZEBfoi-Qdng1ZjGU_M",
-  authDomain: "messager-4abd8.firebaseapp.com",
-  databaseURL: "https://messager-4abd8.firebaseio.com",
-  projectId: "messager-4abd8",
-  storageBucket: "messager-4abd8.appspot.com",
-  messagingSenderId: "650985879545",
-  appId: "1:650985879545:web:66192d0f2b0f0acd40af28",
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
 // Initialize Firebase
