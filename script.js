@@ -1,6 +1,6 @@
 // Import Firebase functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-import { getDatabase, ref, push, onValue, update, remove, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
+import { getDatabase, ref, push, onValue, update, remove } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
 // Firebase Configuration
 const firebaseConfig = {
@@ -16,8 +16,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-
-// Reference to `students`
 const studentsRef = ref(db, "students");
 
 // Add Student
@@ -27,18 +25,14 @@ document.getElementById("addStudentForm").addEventListener("submit", (e) => {
   const phone = document.getElementById("phone").value;
   const userClass = document.getElementById("class").value;
 
-  push(studentsRef, {
-    Name: name,
-    Phone: phone,
-    Class: userClass,
-  }).then(() => {
+  push(studentsRef, { Name: name, Phone: phone, Class: userClass }).then(() => {
     alert("Student added successfully!");
     e.target.reset();
   });
 });
 
 // Fetch and Display Students
-function displayStudents(snapshot) {
+onValue(studentsRef, (snapshot) => {
   const studentsTable = document.getElementById("studentsTable");
   studentsTable.innerHTML = "";
   let index = 1;
@@ -85,26 +79,6 @@ function displayStudents(snapshot) {
       }
     });
   });
-}
-
-// Fetch All Students Initially
-onValue(studentsRef, displayStudents);
-
-// Search by Name
-document.getElementById("searchBar").addEventListener("input", (e) => {
-  const searchValue = e.target.value.trim();
-
-  if (searchValue === "") {
-    // Fetch All Students if Search is Empty
-    onValue(studentsRef, displayStudents);
-  } else {
-    // Query Students by Name
-    const searchQuery = query(studentsRef, orderByChild("Name"), equalTo(searchValue));
-
-    onValue(searchQuery, (snapshot) => {
-      displayStudents(snapshot);
-    });
-  }
 });
 
 // Update Student
@@ -116,11 +90,7 @@ document.getElementById("editStudentForm").addEventListener("submit", (e) => {
   const phone = document.getElementById("editPhone").value;
   const userClass = document.getElementById("editClass").value;
 
-  update(ref(db, `students/${key}`), {
-    Name: name,
-    Phone: phone,
-    Class: userClass,
-  }).then(() => {
+  update(ref(db, `students/${key}`), { Name: name, Phone: phone, Class: userClass }).then(() => {
     alert("Student updated successfully!");
     bootstrap.Modal.getInstance(document.getElementById("editModal")).hide();
   });
