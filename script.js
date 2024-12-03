@@ -96,9 +96,3 @@ document.getElementById("editStudentForm").addEventListener("submit", (e) => {
   });
 });
 
-  // // Export Table Data to Excel
-  // function exportToExcel() {
-  //   const table = document.getElementById("studentsTables"); // Table element ID
-  //   const workbook = XLSX.utils.table_to_book(table, { sheet: "Sheet1" }); // Convert table to workbook
-  //   XLSX.writeFile(workbook, "students_data.xlsx"); // Save as Excel file
-  // }
