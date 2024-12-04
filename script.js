@@ -2,16 +2,19 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getDatabase, ref, push, onValue, update, remove } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
-// Firebase Configuration
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+
+// // Firebase Configuration
+// const firebaseConfig = {
+//   apiKey: "YOUR_API_KEY",
+//   authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+//   databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+//   projectId: "YOUR_PROJECT_ID",
+//   storageBucket: "YOUR_PROJECT_ID.appspot.com",
+//   messagingSenderId: "YOUR_SENDER_ID",
+//   appId: "YOUR_APP_ID"
+// };
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -45,14 +48,35 @@ onValue(studentsRef, (snapshot) => {
     tr.innerHTML = `
       <td>${index++}</td>
       <td>${student.Name}</td>
-      <td>${student.Phone}</td>
+       <div class="d-flex align-items-center justify-content-between">
+          <span class="me-3">${student.Phone}</span>
+          <div class="d-flex align-items-center">
+          <a class="btn btn-success me-1" href="tel:${student.Phone}">
+            Call
+          </a>
+          <a class="btn btn-secondary copy-btn" data-phone="${student.Phone}">
+            Copy
+          </a>
+          </div>
+        </div>
       <td>${student.Class}</td>
       <td>
-        <button class="btn btn-warning btn-sm edit-btn" data-id="${key}">Edit</button>
+      <div class="d-flex align-items-center">
+      <button class="btn btn-warning btn-sm me-1 edit-btn" data-id="${key}">Edit</button>
         <button class="btn btn-danger btn-sm delete-btn" data-id="${key}">Delete</button>
+        </div>
       </td>
     `;
     studentsTable.appendChild(tr);
+  });
+
+  // Copy Phone Number
+  document.querySelectorAll(".copy-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const phone = button.getAttribute("data-phone");
+      navigator.clipboard.writeText(phone);
+      alert("Phone number copied to clipboard!");
+    });
   });
 
   // Handle Edit
