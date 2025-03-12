@@ -3,14 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Management</title>
+  <title>Student Phone Management</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 
 </head>
+<style>
+  .excel{
+    color: white;
+    background-color: #ff6600;
+    border-radius: 5px;
+  }
+  .logo{
+    width: 100px;
+    height: 100px;
+    display: block;
+    box-shadow: 2px 2px 5px #888888;
+    border-radius: 50%;
+    margin-right: 10px
+  }
+</style>
 <body>
   <div class="container mt-3">
-    <h4 class="text-center">Student Management</h4>
+    <div class="d-flex justify-content-center align-items-center">
+      <img class="logo" src="./logo.png" alt="">
+      <h1 class="ms-2">Student Phone Management</h1>
+    </div>  
     <form id="addStudentForm" class="mb-4">
       <div class="mb-1">
         <label for="name" class="form-label">Name</label>
@@ -30,7 +48,7 @@
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Add Student</button>
-      <button onclick="exportToExcel()" class="btn btn-success">Export to Excel</button>
+      <button onclick="exportToExcel()" class="excel btn">Export to Excel</button>
     </form>
     <div class="mb-3">
       <input type="text" id="searchBar" class="form-control" placeholder="Search by name...">

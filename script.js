@@ -2,19 +2,16 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
 import { getDatabase, ref, push, onValue, update, remove } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js";
 
-
-// // Firebase Configuration
-// const firebaseConfig = {
-//   apiKey: "YOUR_API_KEY",
-//   authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-//   databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-//   projectId: "YOUR_PROJECT_ID",
-//   storageBucket: "YOUR_PROJECT_ID.appspot.com",
-//   messagingSenderId: "YOUR_SENDER_ID",
-//   appId: "YOUR_APP_ID"
-// };
-
-
+// Firebase Configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCrfPbwwfiopkPNQZEBfoi-Qdng1ZjGU_M",
+  authDomain: "messager-4abd8.firebaseapp.com",
+  databaseURL: "https://messager-4abd8.firebaseio.com",
+  projectId: "messager-4abd8",
+  storageBucket: "messager-4abd8.appspot.com",
+  messagingSenderId: "650985879545",
+  appId: "1:650985879545:web:66192d0f2b0f0acd40af28",
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -51,10 +48,10 @@ onValue(studentsRef, (snapshot) => {
        <div class="d-flex align-items-center justify-content-between">
           <span class="me-3">${student.Phone}</span>
           <div class="d-flex align-items-center">
-          <a class="btn btn-success me-1" href="tel:${student.Phone}">
+          <a class="btn excel me-1" href="tel:${student.Phone}">
             Call
           </a>
-          <a class="btn btn-secondary copy-btn" data-phone="${student.Phone}">
+          <a class="btn btn-primary copy-btn" data-phone="${student.Phone}">
             Copy
           </a>
           </div>
